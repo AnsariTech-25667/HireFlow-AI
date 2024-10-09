@@ -68,7 +68,7 @@ const Navbar = () => {
                         />
                     </div>
                     <div className="hidden sm:block">
-                        <div className="text-lg font-bold text-gradient">JobPortal</div>
+                        <div className="text-lg font-bold text-gradient">HireFlow AI</div>
                         <div className="text-xs text-gray-500 dark:text-gray-400 -mt-1">by Maaz Ansari</div>
                     </div>
                 </motion.div>
