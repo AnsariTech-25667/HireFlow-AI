@@ -99,24 +99,21 @@ job-portal/
 ## � Application Screenshots
 
 ### 🌟 Hero Section with AI-Powered Search
-![HireFlow AI Hero Section](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274800/hireflow-hero-section_zqb4xm.png)
+![HireFlow AI Hero Section](./screenshots/hero-section.html)
 
-*Modern glassmorphism design with intelligent job search, typing animation, and floating elements. Features real-time search suggestions and popular job categories.*
+*Modern glassmorphism design with intelligent job search, typing animation, and floating elements. Features real-time search suggestions and popular job categories with dynamic typewriter effect.*
 
 ### 💼 Advanced Job Cards with Smart Features
-![HireFlow AI Job Cards](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274801/hireflow-job-cards_m8jnp2.png)
+![HireFlow AI Job Cards](./screenshots/job-cards.html)
 
-*Enhanced job cards featuring glassmorphism design, bookmark functionality, skill tags, urgent/featured badges, and comprehensive job details with application statistics.*
+*Enhanced job cards featuring glassmorphism design, bookmark functionality, skill tags, urgent/featured badges, and comprehensive job details with application statistics and hover animations.*
 
 ### 📊 Recruiter Analytics Dashboard
-![HireFlow AI Analytics Dashboard](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274802/hireflow-analytics_qrh5k8.png)
+![HireFlow AI Analytics Dashboard](./screenshots/analytics-dashboard.html)
 
-*Comprehensive analytics dashboard with Chart.js integration, showing job performance metrics, candidate engagement, market insights, and hiring pipeline visualization.*
+*Comprehensive analytics dashboard with Chart.js integration, showing job performance metrics, candidate engagement, market insights, and hiring pipeline visualization with real-time data.*
 
-### 🎯 Application Tracking System
-![HireFlow AI Application Tracking](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274803/hireflow-applications_j3l2m9.png)
-
-*Advanced application tracking with timeline view, status updates, progress indicators, and real-time notifications for both job seekers and recruiters.*
+> **Note:** Screenshots are interactive HTML files. Open them in a browser to see the full animated experience with glassmorphism effects, Chart.js visualizations, and responsive design.
 
 ## ✨ Key Features Showcased
 
