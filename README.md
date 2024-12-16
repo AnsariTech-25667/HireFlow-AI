@@ -96,7 +96,61 @@ job-portal/
 └── README.md
 ```
 
-## 🚀 Getting Started
+## � Application Screenshots
+
+### 🌟 Hero Section with AI-Powered Search
+![HireFlow AI Hero Section](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274800/hireflow-hero-section_zqb4xm.png)
+
+*Modern glassmorphism design with intelligent job search, typing animation, and floating elements. Features real-time search suggestions and popular job categories.*
+
+### 💼 Advanced Job Cards with Smart Features
+![HireFlow AI Job Cards](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274801/hireflow-job-cards_m8jnp2.png)
+
+*Enhanced job cards featuring glassmorphism design, bookmark functionality, skill tags, urgent/featured badges, and comprehensive job details with application statistics.*
+
+### 📊 Recruiter Analytics Dashboard
+![HireFlow AI Analytics Dashboard](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274802/hireflow-analytics_qrh5k8.png)
+
+*Comprehensive analytics dashboard with Chart.js integration, showing job performance metrics, candidate engagement, market insights, and hiring pipeline visualization.*
+
+### 🎯 Application Tracking System
+![HireFlow AI Application Tracking](https://res.cloudinary.com/dlbvdfqxt/image/upload/v1732274803/hireflow-applications_j3l2m9.png)
+
+*Advanced application tracking with timeline view, status updates, progress indicators, and real-time notifications for both job seekers and recruiters.*
+
+## ✨ Key Features Showcased
+
+### 🎨 **Modern UI/UX Design**
+- **Glassmorphism Design System** - Implemented cutting-edge glass-effect cards with backdrop blur
+- **Dark/Light Theme Toggle** - Seamless theme switching with system preference detection
+- **Framer Motion Animations** - Smooth micro-interactions and page transitions
+- **Responsive Mobile-First** - Optimized for all screen sizes with touch gestures
+
+### 🤖 **AI-Powered Intelligence**
+- **Smart Job Matching** - AI algorithms for personalized job recommendations
+- **Natural Language Search** - Intelligent search with autocomplete and suggestions
+- **Resume Analysis** - AI-powered skill extraction and job compatibility scoring
+- **Chat Assistant** - Interactive AI career guidance and interview preparation
+
+### ⚡ **Real-Time Features**
+- **WebSocket Integration** - Live updates for applications and notifications
+- **Real-Time Chat** - Instant messaging between recruiters and candidates
+- **Live Notifications** - Push notifications for job alerts and status changes
+- **Typing Animations** - Dynamic content with typewriter effects
+
+### 📊 **Advanced Analytics**
+- **Chart.js Integration** - Interactive charts and data visualizations
+- **Performance Metrics** - Job posting analytics and candidate engagement tracking
+- **Market Insights** - Salary benchmarking and industry trend analysis
+- **A/B Testing Framework** - Optimized job descriptions and conversion tracking
+
+### � **Enterprise Security**
+- **Clerk Authentication** - Secure user management with role-based access
+- **JWT Token Management** - Automated token refresh and session handling
+- **Data Encryption** - Advanced security for sensitive information
+- **GDPR Compliance** - Privacy controls and data protection features
+
+## �🚀 Getting Started
 
 ### Prerequisites
 - Node.js (v16 or higher)
