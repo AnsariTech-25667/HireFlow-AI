@@ -1,59 +1,59 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 const PageTransition = ({ children }) => {
-  const location = useLocation()
-  const [displayLocation, setDisplayLocation] = useState(location)
-  const [transitionStage, setTransitionStage] = useState("fadeIn")
+  const location = useLocation();
+  const [displayLocation, setDisplayLocation] = useState(location);
+  const [transitionStage, setTransitionStage] = useState('fadeIn');
 
   useEffect(() => {
     if (location !== displayLocation) {
-      setTransitionStage("fadeOut")
+      setTransitionStage('fadeOut');
     }
-  }, [location, displayLocation])
+  }, [location, displayLocation]);
 
   const variants = {
     fadeIn: {
       opacity: 1,
       scale: 1,
-      filter: "blur(0px)",
+      filter: 'blur(0px)',
       transition: {
         duration: 0.4,
-        ease: "easeOut"
-      }
+        ease: 'easeOut',
+      },
     },
     fadeOut: {
       opacity: 0,
       scale: 0.95,
-      filter: "blur(4px)",
+      filter: 'blur(4px)',
       transition: {
         duration: 0.3,
-        ease: "easeIn"
-      }
-    }
-  }
+        ease: 'easeIn',
+      },
+    },
+  };
 
   const slideVariants = {
     initial: { x: 300, opacity: 0 },
     in: { x: 0, opacity: 1 },
-    out: { x: -300, opacity: 0 }
-  }
+    out: { x: -300, opacity: 0 },
+  };
 
   const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  }
+    type: 'tween',
+    ease: 'anticipate',
+    duration: 0.5,
+  };
 
   return (
     <div className="relative overflow-hidden">
       <AnimatePresence
         mode="wait"
         onExitComplete={() => {
-          if (transitionStage === "fadeOut") {
-            setDisplayLocation(location)
-            setTransitionStage("fadeIn")
+          if (transitionStage === 'fadeOut') {
+            setDisplayLocation(location);
+            setTransitionStage('fadeIn');
           }
         }}
       >
@@ -69,7 +69,7 @@ const PageTransition = ({ children }) => {
 
       {/* Loading overlay during transition */}
       <AnimatePresence>
-        {transitionStage === "fadeOut" && (
+        {transitionStage === 'fadeOut' && (
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-primary-500/10 to-accent-500/10 backdrop-blur-sm flex items-center justify-center z-50"
             initial={{ opacity: 0 }}
@@ -87,17 +87,17 @@ const PageTransition = ({ children }) => {
         )}
       </AnimatePresence>
     </div>
-  )
-}
+  );
+};
 
 // Enhanced page wrapper with scroll restoration
-export const PageWrapper = ({ children, className = "" }) => {
-  const location = useLocation()
+export const PageWrapper = ({ children, className = '' }) => {
+  const location = useLocation();
 
   useEffect(() => {
     // Restore scroll position to top on route change
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [location.pathname])
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [location.pathname]);
 
   return (
     <motion.div
@@ -106,18 +106,18 @@ export const PageWrapper = ({ children, className = "" }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{
-        type: "spring",
+        type: 'spring',
         stiffness: 260,
-        damping: 20
+        damping: 20,
       }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // Stagger children animation wrapper
-export const StaggerWrapper = ({ children, className = "", delay = 0.1 }) => {
+export const StaggerWrapper = ({ children, className = '', delay = 0.1 }) => {
   return (
     <motion.div
       className={className}
@@ -126,37 +126,37 @@ export const StaggerWrapper = ({ children, className = "", delay = 0.1 }) => {
       variants={{
         visible: {
           transition: {
-            staggerChildren: delay
-          }
-        }
+            staggerChildren: delay,
+          },
+        },
       }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
 // Individual stagger item
-export const StaggerItem = ({ children, className = "" }) => {
+export const StaggerItem = ({ children, className = '' }) => {
   return (
     <motion.div
       className={className}
       variants={{
         hidden: { opacity: 0, y: 20 },
-        visible: { 
-          opacity: 1, 
+        visible: {
+          opacity: 1,
           y: 0,
           transition: {
-            type: "spring",
+            type: 'spring',
             stiffness: 260,
-            damping: 20
-          }
-        }
+            damping: 20,
+          },
+        },
       }}
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
-export default PageTransition
+export default PageTransition;

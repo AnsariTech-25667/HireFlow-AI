@@ -1,341 +1,656 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HireFlow AI - Job Cards</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            50: '#eff6ff',
-                            100: '#dbeafe',
-                            200: '#bfdbfe',
-                            300: '#93c5fd',
-                            400: '#60a5fa',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                            800: '#1e40af',
-                            900: '#1e3a8a',
-                        }
-                    }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                200: '#bfdbfe',
+                300: '#93c5fd',
+                400: '#60a5fa',
+                500: '#3b82f6',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                800: '#1e40af',
+                900: '#1e3a8a',
+              },
+            },
+          },
+        },
+      };
     </script>
     <style>
-        .glass-card {
-            background: rgba(255, 255, 255, 0.25);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+      .glass-card {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      .pulse-animation {
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
         }
-        .pulse-animation {
-            animation: pulse 2s infinite;
+        50% {
+          transform: scale(1.05);
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+      }
     </style>
-</head>
-<body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen p-8">
+  </head>
+  <body
+    class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen p-8"
+  >
     <div class="container mx-auto">
-        <h2 class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Featured Job Opportunities
-        </h2>
-        
-        <!-- Job Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Featured Job Card -->
-            <div class="relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 ring-2 ring-yellow-400 transform hover:-translate-y-2">
-                <!-- Featured Badge -->
-                <div class="absolute -top-2 -right-2">
-                    <div class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-3 py-1 rounded-full text-xs font-semibold pulse-animation">
-                        ⭐ Featured
-                    </div>
-                </div>
-                
-                <!-- Bookmark Button -->
-                <button class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                    <svg class="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
-                    </svg>
-                </button>
+      <h2
+        class="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+      >
+        Featured Job Opportunities
+      </h2>
 
-                <!-- Company Info -->
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-2 4h2M7 7h2v2H7z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-800 hover:text-blue-600 transition-colors cursor-pointer">
-                            Senior Full Stack Developer
-                        </h3>
-                        <p class="text-gray-600 text-sm">TechCorp Solutions</p>
-                    </div>
-                </div>
+      <!-- Job Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Featured Job Card -->
+        <div
+          class="relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 ring-2 ring-yellow-400 transform hover:-translate-y-2"
+        >
+          <!-- Featured Badge -->
+          <div class="absolute -top-2 -right-2">
+            <div
+              class="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-3 py-1 rounded-full text-xs font-semibold pulse-animation"
+            >
+              ⭐ Featured
+            </div>
+          </div>
 
-                <!-- Job Details -->
-                <div class="space-y-3 mb-4">
-                    <div class="flex items-center gap-2 text-gray-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        </svg>
-                        <span class="text-sm">San Francisco, CA</span>
-                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">Remote</span>
-                    </div>
+          <!-- Bookmark Button -->
+          <button
+            class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+          >
+            <svg
+              class="w-5 h-5 text-blue-500"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z" />
+            </svg>
+          </button>
 
-                    <div class="flex items-center gap-4 text-sm text-gray-600">
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <span>Full-time</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                            </svg>
-                            <span>$120K - $180K</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                            <span>2 days ago</span>
-                        </div>
-                    </div>
-                </div>
+          <!-- Company Info -->
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-2 4h2M7 7h2v2H7z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h3
+                class="font-bold text-lg text-gray-800 hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                Senior Full Stack Developer
+              </h3>
+              <p class="text-gray-600 text-sm">TechCorp Solutions</p>
+            </div>
+          </div>
 
-                <!-- Description -->
-                <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                    Join our innovative team building next-generation web applications using React, Node.js, and cutting-edge technologies. We're looking for a passionate developer who loves solving complex problems.
-                </p>
-
-                <!-- Skills -->
-                <div class="mb-4">
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">React</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Node.js</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">TypeScript</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">MongoDB</span>
-                        <span class="text-gray-500 text-xs py-1">+3 more</span>
-                    </div>
-                </div>
-
-                <!-- Stats and Apply Button -->
-                <div class="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                            <span>247 views</span>
-                        </div>
-                        <div>12 applications</div>
-                    </div>
-
-                    <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-                        Apply Now
-                    </button>
-                </div>
+          <!-- Job Details -->
+          <div class="space-y-3 mb-4">
+            <div class="flex items-center gap-2 text-gray-600">
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+              </svg>
+              <span class="text-sm">San Francisco, CA</span>
+              <span
+                class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs"
+                >Remote</span
+              >
             </div>
 
-            <!-- Urgent Job Card -->
-            <div class="relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 transform hover:-translate-y-2">
-                <!-- Urgent Badge -->
-                <div class="absolute top-4 left-4">
-                    <div class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium pulse-animation">
-                        🔥 Urgent
-                    </div>
-                </div>
+            <div class="flex items-center gap-4 text-sm text-gray-600">
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Full-time</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                  />
+                </svg>
+                <span>$120K - $180K</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>2 days ago</span>
+              </div>
+            </div>
+          </div>
 
-                <!-- Bookmark Button -->
-                <button class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
-                    </svg>
-                </button>
+          <!-- Description -->
+          <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+            Join our innovative team building next-generation web applications
+            using React, Node.js, and cutting-edge technologies. We're looking
+            for a passionate developer who loves solving complex problems.
+          </p>
 
-                <!-- Company Info -->
-                <div class="flex items-center gap-3 mb-4 mt-8">
-                    <div class="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-2 4h2M7 7h2v2H7z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-800 hover:text-blue-600 transition-colors cursor-pointer">
-                            React Native Developer
-                        </h3>
-                        <p class="text-gray-600 text-sm">StartupXYZ</p>
-                    </div>
-                </div>
+          <!-- Skills -->
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >React</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >Node.js</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >TypeScript</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >MongoDB</span
+              >
+              <span class="text-gray-500 text-xs py-1">+3 more</span>
+            </div>
+          </div>
 
-                <!-- Job Details -->
-                <div class="space-y-3 mb-4">
-                    <div class="flex items-center gap-2 text-gray-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        </svg>
-                        <span class="text-sm">New York, NY</span>
-                    </div>
-
-                    <div class="flex items-center gap-4 text-sm text-gray-600">
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <span>Full-time</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                            </svg>
-                            <span>$90K - $130K</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                            <span>1 day ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <p class="text-gray-600 text-sm mb-4">
-                    Build amazing mobile experiences for iOS and Android. Join a fast-growing startup and make a real impact on millions of users worldwide.
-                </p>
-
-                <!-- Skills -->
-                <div class="mb-4">
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">React Native</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">JavaScript</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">iOS</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Android</span>
-                    </div>
-                </div>
-
-                <!-- Stats and Apply Button -->
-                <div class="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                            <span>189 views</span>
-                        </div>
-                        <div>8 applications</div>
-                    </div>
-
-                    <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-                        Apply Now
-                    </button>
-                </div>
+          <!-- Stats and Apply Button -->
+          <div
+            class="flex items-center justify-between pt-4 border-t border-gray-200"
+          >
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                <span>247 views</span>
+              </div>
+              <div>12 applications</div>
             </div>
 
-            <!-- Regular Job Card -->
-            <div class="relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 transform hover:-translate-y-2">
-                <!-- Bookmark Button -->
-                <button class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors">
-                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/>
-                    </svg>
-                </button>
-
-                <!-- Company Info -->
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-2 4h2M7 7h2v2H7z"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg text-gray-800 hover:text-blue-600 transition-colors cursor-pointer">
-                            Data Scientist
-                        </h3>
-                        <p class="text-gray-600 text-sm">DataCorp Inc</p>
-                    </div>
-                </div>
-
-                <!-- Job Details -->
-                <div class="space-y-3 mb-4">
-                    <div class="flex items-center gap-2 text-gray-600">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        </svg>
-                        <span class="text-sm">Boston, MA</span>
-                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">Remote</span>
-                    </div>
-
-                    <div class="flex items-center gap-4 text-sm text-gray-600">
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                            </svg>
-                            <span>Full-time</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                            </svg>
-                            <span>$110K - $160K</span>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                            </svg>
-                            <span>3 days ago</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Description -->
-                <p class="text-gray-600 text-sm mb-4">
-                    Analyze complex datasets to drive business insights. Work with machine learning algorithms and statistical models to solve real-world problems.
-                </p>
-
-                <!-- Skills -->
-                <div class="mb-4">
-                    <div class="flex flex-wrap gap-2">
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Python</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">SQL</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Machine Learning</span>
-                        <span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">Pandas</span>
-                        <span class="text-gray-500 text-xs py-1">+2 more</span>
-                    </div>
-                </div>
-
-                <!-- Stats and Apply Button -->
-                <div class="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <div class="flex items-center gap-4 text-xs text-gray-500">
-                        <div class="flex items-center gap-1">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                            </svg>
-                            <span>156 views</span>
-                        </div>
-                        <div>15 applications</div>
-                    </div>
-
-                    <button class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl">
-                        Apply Now
-                    </button>
-                </div>
-            </div>
+            <button
+              class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Apply Now
+            </button>
+          </div>
         </div>
+
+        <!-- Urgent Job Card -->
+        <div
+          class="relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 transform hover:-translate-y-2"
+        >
+          <!-- Urgent Badge -->
+          <div class="absolute top-4 left-4">
+            <div
+              class="bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium pulse-animation"
+            >
+              🔥 Urgent
+            </div>
+          </div>
+
+          <!-- Bookmark Button -->
+          <button
+            class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+          >
+            <svg
+              class="w-5 h-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+          </button>
+
+          <!-- Company Info -->
+          <div class="flex items-center gap-3 mb-4 mt-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-2 4h2M7 7h2v2H7z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h3
+                class="font-bold text-lg text-gray-800 hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                React Native Developer
+              </h3>
+              <p class="text-gray-600 text-sm">StartupXYZ</p>
+            </div>
+          </div>
+
+          <!-- Job Details -->
+          <div class="space-y-3 mb-4">
+            <div class="flex items-center gap-2 text-gray-600">
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+              </svg>
+              <span class="text-sm">New York, NY</span>
+            </div>
+
+            <div class="flex items-center gap-4 text-sm text-gray-600">
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Full-time</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                  />
+                </svg>
+                <span>$90K - $130K</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>1 day ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-gray-600 text-sm mb-4">
+            Build amazing mobile experiences for iOS and Android. Join a
+            fast-growing startup and make a real impact on millions of users
+            worldwide.
+          </p>
+
+          <!-- Skills -->
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >React Native</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >JavaScript</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >iOS</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >Android</span
+              >
+            </div>
+          </div>
+
+          <!-- Stats and Apply Button -->
+          <div
+            class="flex items-center justify-between pt-4 border-t border-gray-200"
+          >
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                <span>189 views</span>
+              </div>
+              <div>8 applications</div>
+            </div>
+
+            <button
+              class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Apply Now
+            </button>
+          </div>
+        </div>
+
+        <!-- Regular Job Card -->
+        <div
+          class="relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 transform hover:-translate-y-2"
+        >
+          <!-- Bookmark Button -->
+          <button
+            class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+          >
+            <svg
+              class="w-5 h-5 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"
+              />
+            </svg>
+          </button>
+
+          <!-- Company Info -->
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-500 rounded-xl flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-2 4h2M7 7h2v2H7z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h3
+                class="font-bold text-lg text-gray-800 hover:text-blue-600 transition-colors cursor-pointer"
+              >
+                Data Scientist
+              </h3>
+              <p class="text-gray-600 text-sm">DataCorp Inc</p>
+            </div>
+          </div>
+
+          <!-- Job Details -->
+          <div class="space-y-3 mb-4">
+            <div class="flex items-center gap-2 text-gray-600">
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+              </svg>
+              <span class="text-sm">Boston, MA</span>
+              <span
+                class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs"
+                >Remote</span
+              >
+            </div>
+
+            <div class="flex items-center gap-4 text-sm text-gray-600">
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>Full-time</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                  />
+                </svg>
+                <span>$110K - $160K</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                <span>3 days ago</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-gray-600 text-sm mb-4">
+            Analyze complex datasets to drive business insights. Work with
+            machine learning algorithms and statistical models to solve
+            real-world problems.
+          </p>
+
+          <!-- Skills -->
+          <div class="mb-4">
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >Python</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >SQL</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >Machine Learning</span
+              >
+              <span
+                class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-medium"
+                >Pandas</span
+              >
+              <span class="text-gray-500 text-xs py-1">+2 more</span>
+            </div>
+          </div>
+
+          <!-- Stats and Apply Button -->
+          <div
+            class="flex items-center justify-between pt-4 border-t border-gray-200"
+          >
+            <div class="flex items-center gap-4 text-xs text-gray-500">
+              <div class="flex items-center gap-1">
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                  />
+                </svg>
+                <span>156 views</span>
+              </div>
+              <div>15 applications</div>
+            </div>
+
+            <button
+              class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Apply Now
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

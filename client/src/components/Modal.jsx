@@ -1,74 +1,74 @@
-import { useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
-const Modal = ({ 
-  isOpen, 
-  onClose, 
-  children, 
-  title, 
-  size = 'md', 
+const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  title,
+  size = 'md',
   showCloseButton = true,
   closeOnOverlayClick = true,
-  className = ''
+  className = '',
 }) => {
   // Handle escape key
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleEscape = e => {
       if (e.key === 'Escape') {
-        onClose()
+        onClose();
       }
-    }
+    };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen, onClose])
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
 
   const sizeClasses = {
     sm: 'max-w-md',
     md: 'max-w-lg',
     lg: 'max-w-2xl',
     xl: 'max-w-4xl',
-    full: 'max-w-7xl mx-4'
-  }
+    full: 'max-w-7xl mx-4',
+  };
 
   const backdropVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  }
+    visible: { opacity: 1 },
+  };
 
   const modalVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       scale: 0.8,
-      y: 50
+      y: 50,
     },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       scale: 1,
       y: 0,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 25,
-        stiffness: 300
-      }
+        stiffness: 300,
+      },
     },
     exit: {
       opacity: 0,
       scale: 0.8,
       y: 50,
       transition: {
-        duration: 0.2
-      }
-    }
-  }
+        duration: 0.2,
+      },
+    },
+  };
 
   return (
     <AnimatePresence>
@@ -126,7 +126,7 @@ const Modal = ({
         </div>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

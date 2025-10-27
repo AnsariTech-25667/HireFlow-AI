@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
-import { registerValidation, loginValidation } from '../middleware/validation.js';
+import { registerValidation } from '../middleware/validation.js';
 
 // Register new user
 export const registerUser = async (req, res) => {
@@ -11,7 +11,7 @@ export const registerUser = async (req, res) => {
     if (error) {
       return res.status(400).json({
         success: false,
-        message: error.details[0].message
+        message: error.details[0].message,
       });
     }
 
@@ -22,7 +22,7 @@ export const registerUser = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        message: 'User already exists with this email'
+        message: 'User already exists with this email',
       });
     }
 
@@ -41,7 +41,7 @@ export const registerUser = async (req, res) => {
       image: `https://api.dicebear.com/7.x/initials/svg?seed=${name}`,
       skills: [],
       experience: 0,
-      isActive: true
+      isActive: true,
     });
 
     await user.save();
@@ -60,16 +60,15 @@ export const registerUser = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
-        image: user.image
+        image: user.image,
       },
-      token
+      token,
     });
-
   } catch (error) {
     console.error('Register error:', error);
     res.status(500).json({
       success: false,
-      message: 'Server error during registration'
+      message: 'Server error during registration',
     });
   }
 };

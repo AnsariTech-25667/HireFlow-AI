@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useWebSocket } from '../context/WebSocketContext'
-import { 
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useWebSocket } from '../context/WebSocketContext';
+import {
   UsersIcon,
   ChatBubbleLeftRightIcon,
   CheckCircleIcon,
@@ -9,67 +9,67 @@ import {
   ClockIcon,
   DocumentTextIcon,
   StarIcon,
-  EyeIcon
-} from '@heroicons/react/24/outline'
+  EyeIcon,
+} from '@heroicons/react/24/outline';
 
 const CollaborativeHiring = ({ jobId }) => {
-  const [reviewers, setReviewers] = useState([])
-  const [applications, setApplications] = useState([])
-  const [activeDiscussion, setActiveDiscussion] = useState(null)
-  const [teamVotes, setTeamVotes] = useState({})
-  const [comments, setComments] = useState({})
-  const [newComment, setNewComment] = useState('')
-  const [selectedApplication, setSelectedApplication] = useState(null)
-  
-  const { sendMessage, lastMessage, isConnected } = useWebSocket()
+  const [reviewers, setReviewers] = useState([]);
+  const [applications, setApplications] = useState([]);
+  const [activeDiscussion, setActiveDiscussion] = useState(null);
+  const [teamVotes, setTeamVotes] = useState({});
+  const [comments, setComments] = useState({});
+  const [newComment, setNewComment] = useState('');
+  const [selectedApplication, setSelectedApplication] = useState(null);
+
+  const { sendMessage, lastMessage, isConnected } = useWebSocket();
 
   useEffect(() => {
     if (lastMessage) {
       switch (lastMessage.type) {
         case 'REVIEWER_JOINED':
-          setReviewers(prev => [...prev, lastMessage.data.reviewer])
-          break
+          setReviewers(prev => [...prev, lastMessage.data.reviewer]);
+          break;
         case 'VOTE_CAST':
           setTeamVotes(prev => ({
             ...prev,
             [lastMessage.data.applicationId]: {
               ...prev[lastMessage.data.applicationId],
-              [lastMessage.data.reviewerId]: lastMessage.data.vote
-            }
-          }))
-          break
+              [lastMessage.data.reviewerId]: lastMessage.data.vote,
+            },
+          }));
+          break;
         case 'COMMENT_ADDED':
           setComments(prev => ({
             ...prev,
             [lastMessage.data.applicationId]: [
               ...(prev[lastMessage.data.applicationId] || []),
-              lastMessage.data.comment
-            ]
-          }))
-          break
+              lastMessage.data.comment,
+            ],
+          }));
+          break;
         case 'APPLICATION_REVIEW_UPDATE':
-          setApplications(prev => 
-            prev.map(app => 
-              app.id === lastMessage.data.applicationId 
+          setApplications(prev =>
+            prev.map(app =>
+              app.id === lastMessage.data.applicationId
                 ? { ...app, ...lastMessage.data.updates }
                 : app
             )
-          )
-          break
+          );
+          break;
         default:
-          break
+          break;
       }
     }
-  }, [lastMessage])
+  }, [lastMessage]);
 
   useEffect(() => {
     if (isConnected && jobId) {
       sendMessage({
         type: 'JOIN_HIRING_TEAM',
-        data: { jobId }
-      })
+        data: { jobId },
+      });
     }
-  }, [isConnected, jobId, sendMessage])
+  }, [isConnected, jobId, sendMessage]);
 
   const castVote = (applicationId, vote) => {
     sendMessage({
@@ -78,45 +78,45 @@ const CollaborativeHiring = ({ jobId }) => {
         jobId,
         applicationId,
         vote, // 'approve', 'reject', 'maybe'
-        reviewerId: 'current_user'
-      }
-    })
-  }
+        reviewerId: 'current_user',
+      },
+    });
+  };
 
-  const addComment = (applicationId) => {
-    if (!newComment.trim()) return
+  const addComment = applicationId => {
+    if (!newComment.trim()) return;
 
     const comment = {
       id: Date.now(),
       text: newComment,
       author: 'current_user',
       timestamp: Date.now(),
-      applicationId
-    }
+      applicationId,
+    };
 
     sendMessage({
       type: 'ADD_COMMENT',
       data: {
         jobId,
         applicationId,
-        comment
-      }
-    })
+        comment,
+      },
+    });
 
-    setNewComment('')
-  }
+    setNewComment('');
+  };
 
-  const getVoteStats = (applicationId) => {
-    const votes = teamVotes[applicationId] || {}
-    const voteCount = Object.values(votes)
-    
+  const getVoteStats = applicationId => {
+    const votes = teamVotes[applicationId] || {};
+    const voteCount = Object.values(votes);
+
     return {
       approve: voteCount.filter(v => v === 'approve').length,
       reject: voteCount.filter(v => v === 'reject').length,
       maybe: voteCount.filter(v => v === 'maybe').length,
-      total: voteCount.length
-    }
-  }
+      total: voteCount.length,
+    };
+  };
 
   const mockApplications = [
     {
@@ -126,7 +126,7 @@ const CollaborativeHiring = ({ jobId }) => {
       experience: '5 years',
       skills: ['React', 'Node.js', 'TypeScript'],
       resumeScore: 85,
-      status: 'reviewing'
+      status: 'reviewing',
     },
     {
       id: 2,
@@ -135,9 +135,9 @@ const CollaborativeHiring = ({ jobId }) => {
       experience: '3 years',
       skills: ['Vue.js', 'Python', 'PostgreSQL'],
       resumeScore: 92,
-      status: 'reviewing'
-    }
-  ]
+      status: 'reviewing',
+    },
+  ];
 
   return (
     <div className="space-y-6">
@@ -148,7 +148,9 @@ const CollaborativeHiring = ({ jobId }) => {
             <UsersIcon className="w-5 h-5" />
             Hiring Team
           </h3>
-          <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'} animate-pulse`}></div>
+          <div
+            className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-400' : 'bg-red-400'} animate-pulse`}
+          ></div>
         </div>
 
         <div className="flex flex-wrap gap-3">
@@ -157,7 +159,7 @@ const CollaborativeHiring = ({ jobId }) => {
               <p className="text-sm">Waiting for team members to join...</p>
             </div>
           ) : (
-            reviewers.map((reviewer) => (
+            reviewers.map(reviewer => (
               <motion.div
                 key={reviewer.id}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -181,10 +183,10 @@ const CollaborativeHiring = ({ jobId }) => {
 
       {/* Applications Review */}
       <div className="grid gap-6">
-        {mockApplications.map((application) => {
-          const voteStats = getVoteStats(application.id)
-          const applicationComments = comments[application.id] || []
-          
+        {mockApplications.map(application => {
+          const voteStats = getVoteStats(application.id);
+          const applicationComments = comments[application.id] || [];
+
           return (
             <motion.div
               key={application.id}
@@ -213,11 +215,15 @@ const CollaborativeHiring = ({ jobId }) => {
                     </div>
                   </div>
                 </div>
-                
+
                 <button
-                  onClick={() => setSelectedApplication(
-                    selectedApplication === application.id ? null : application.id
-                  )}
+                  onClick={() =>
+                    setSelectedApplication(
+                      selectedApplication === application.id
+                        ? null
+                        : application.id
+                    )
+                  }
                   className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                 >
                   <EyeIcon className="w-5 h-5 text-gray-500" />
@@ -227,7 +233,7 @@ const CollaborativeHiring = ({ jobId }) => {
               {/* Skills */}
               <div className="mb-4">
                 <div className="flex flex-wrap gap-2">
-                  {application.skills.map((skill) => (
+                  {application.skills.map(skill => (
                     <span
                       key={skill}
                       className="px-2 py-1 text-xs rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
@@ -248,7 +254,7 @@ const CollaborativeHiring = ({ jobId }) => {
                     {voteStats.total} votes
                   </div>
                 </div>
-                
+
                 <div className="flex gap-3 mb-3">
                   <motion.button
                     onClick={() => castVote(application.id, 'approve')}
@@ -259,7 +265,7 @@ const CollaborativeHiring = ({ jobId }) => {
                     <CheckCircleIcon className="w-4 h-4" />
                     Approve ({voteStats.approve})
                   </motion.button>
-                  
+
                   <motion.button
                     onClick={() => castVote(application.id, 'maybe')}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 hover:bg-yellow-200 dark:hover:bg-yellow-900/50 transition-colors"
@@ -269,7 +275,7 @@ const CollaborativeHiring = ({ jobId }) => {
                     <ClockIcon className="w-4 h-4" />
                     Maybe ({voteStats.maybe})
                   </motion.button>
-                  
+
                   <motion.button
                     onClick={() => castVote(application.id, 'reject')}
                     className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors"
@@ -288,21 +294,27 @@ const CollaborativeHiring = ({ jobId }) => {
                       <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                         <div className="flex h-2 rounded-full overflow-hidden">
                           {voteStats.approve > 0 && (
-                            <div 
+                            <div
                               className="bg-green-500"
-                              style={{ width: `${(voteStats.approve / voteStats.total) * 100}%` }}
+                              style={{
+                                width: `${(voteStats.approve / voteStats.total) * 100}%`,
+                              }}
                             />
                           )}
                           {voteStats.maybe > 0 && (
-                            <div 
+                            <div
                               className="bg-yellow-500"
-                              style={{ width: `${(voteStats.maybe / voteStats.total) * 100}%` }}
+                              style={{
+                                width: `${(voteStats.maybe / voteStats.total) * 100}%`,
+                              }}
                             />
                           )}
                           {voteStats.reject > 0 && (
-                            <div 
+                            <div
                               className="bg-red-500"
-                              style={{ width: `${(voteStats.reject / voteStats.total) * 100}%` }}
+                              style={{
+                                width: `${(voteStats.reject / voteStats.total) * 100}%`,
+                              }}
                             />
                           )}
                         </div>
@@ -320,11 +332,14 @@ const CollaborativeHiring = ({ jobId }) => {
                     Team Discussion ({applicationComments.length})
                   </h5>
                 </div>
-                
+
                 {applicationComments.length > 0 && (
                   <div className="space-y-2 mb-3 max-h-32 overflow-y-auto">
-                    {applicationComments.map((comment) => (
-                      <div key={comment.id} className="p-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+                    {applicationComments.map(comment => (
+                      <div
+                        key={comment.id}
+                        className="p-2 rounded-lg bg-gray-50 dark:bg-gray-800"
+                      >
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                             {comment.author}
@@ -340,12 +355,12 @@ const CollaborativeHiring = ({ jobId }) => {
                     ))}
                   </div>
                 )}
-                
+
                 <div className="flex gap-2">
                   <input
                     type="text"
                     value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
+                    onChange={e => setNewComment(e.target.value)}
                     placeholder="Add a comment..."
                     className="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
@@ -361,11 +376,11 @@ const CollaborativeHiring = ({ jobId }) => {
                 </div>
               </div>
             </motion.div>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CollaborativeHiring
+export default CollaborativeHiring;

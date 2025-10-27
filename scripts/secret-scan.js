@@ -133,7 +133,7 @@ function getFilesToScan() {
     if (gitFiles.length > 0) {
       return gitFiles;
     }
-  } catch (error) {
+  } catch {
     // Not a git repository or git not available
   }
 
@@ -164,7 +164,7 @@ function getAllFiles(dir, files = []) {
         }
       }
     }
-  } catch (error) {
+  } catch {
     // Skip directories we can't read
   }
 
@@ -231,7 +231,7 @@ function checkFile(filePath) {
       SECRET_PATTERNS.forEach(({ pattern, name }) => {
         const matches = line.match(pattern);
         if (matches) {
-          matches.forEach(match => {
+          matches.forEach(_match => {
             foundSecrets.push({
               lineNumber: lineNumber + 1,
               pattern: name,
@@ -243,7 +243,7 @@ function checkFile(filePath) {
     });
 
     return foundSecrets;
-  } catch (error) {
+  } catch {
     // Skip files we can't read (binary files, permission issues, etc.)
     return [];
   }
@@ -254,7 +254,6 @@ function checkFile(filePath) {
  */
 function scanFiles() {
   const filesToScan = getFilesToScan();
-  let totalSecretsFound = 0;
   let totalFilesScanned = 0;
   const filesWithSecrets = [];
 
@@ -271,7 +270,6 @@ function scanFiles() {
 
     if (secrets.length > 0) {
       filesWithSecrets.push({ file, secrets });
-      totalSecretsFound += secrets.length;
     }
   });
 

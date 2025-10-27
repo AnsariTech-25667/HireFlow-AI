@@ -1,108 +1,111 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { createContext, useContext, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
-const ThemeContext = createContext()
+const ThemeContext = createContext();
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext)
+  const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider')
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
-  return context
-}
+  return context;
+};
 
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('system')
-  const [isDark, setIsDark] = useState(false)
-  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [theme, setTheme] = useState('system');
+  const [isDark, setIsDark] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Check system preference
   const getSystemTheme = () => {
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  };
 
   // Initialize theme
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'system'
-    setTheme(savedTheme)
-    
-    const applyTheme = (themeToApply) => {
-      let isDarkMode = false
-      
-      if (themeToApply === 'system') {
-        isDarkMode = getSystemTheme() === 'dark'
-      } else {
-        isDarkMode = themeToApply === 'dark'
-      }
-      
-      setIsDark(isDarkMode)
-      
-      if (isDarkMode) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    }
+    const savedTheme = localStorage.getItem('theme') || 'system';
+    setTheme(savedTheme);
 
-    applyTheme(savedTheme)
+    const applyTheme = themeToApply => {
+      let isDarkMode = false;
+
+      if (themeToApply === 'system') {
+        isDarkMode = getSystemTheme() === 'dark';
+      } else {
+        isDarkMode = themeToApply === 'dark';
+      }
+
+      setIsDark(isDarkMode);
+
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    };
+
+    applyTheme(savedTheme);
 
     // Listen for system theme changes
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = () => {
       if (theme === 'system') {
-        applyTheme('system')
+        applyTheme('system');
       }
-    }
-    
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [theme])
+    };
 
-  const changeTheme = async (newTheme) => {
-    if (newTheme === theme) return
-    
-    setIsTransitioning(true)
-    
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, [theme]);
+
+  const changeTheme = async newTheme => {
+    if (newTheme === theme) return;
+
+    setIsTransitioning(true);
+
     // Add transition effect
-    document.documentElement.style.transition = 'background-color 0.3s ease, color 0.3s ease'
-    
+    document.documentElement.style.transition =
+      'background-color 0.3s ease, color 0.3s ease';
+
     // Wait for transition to start
-    await new Promise(resolve => setTimeout(resolve, 50))
-    
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-    
-    let isDarkMode = false
+    await new Promise(resolve => setTimeout(resolve, 50));
+
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    let isDarkMode = false;
     if (newTheme === 'system') {
-      isDarkMode = getSystemTheme() === 'dark'
+      isDarkMode = getSystemTheme() === 'dark';
     } else {
-      isDarkMode = newTheme === 'dark'
+      isDarkMode = newTheme === 'dark';
     }
-    
-    setIsDark(isDarkMode)
-    
+
+    setIsDark(isDarkMode);
+
     if (isDarkMode) {
-      document.documentElement.classList.add('dark')
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('dark')
+      document.documentElement.classList.remove('dark');
     }
-    
+
     // Remove transition after animation
     setTimeout(() => {
-      document.documentElement.style.transition = ''
-      setIsTransitioning(false)
-    }, 300)
-  }
+      document.documentElement.style.transition = '';
+      setIsTransitioning(false);
+    }, 300);
+  };
 
   const toggleTheme = () => {
     if (theme === 'light') {
-      changeTheme('dark')
+      changeTheme('dark');
     } else if (theme === 'dark') {
-      changeTheme('system')
+      changeTheme('system');
     } else {
-      changeTheme('light')
+      changeTheme('light');
     }
-  }
+  };
 
   const value = {
     theme,
@@ -110,8 +113,8 @@ export const ThemeProvider = ({ children }) => {
     isTransitioning,
     changeTheme,
     toggleTheme,
-    getSystemTheme
-  }
+    getSystemTheme,
+  };
 
   return (
     <ThemeContext.Provider value={value}>
@@ -141,7 +144,7 @@ export const ThemeProvider = ({ children }) => {
       )}
       {children}
     </ThemeContext.Provider>
-  )
-}
+  );
+};
 
-export default ThemeProvider
+export default ThemeProvider;

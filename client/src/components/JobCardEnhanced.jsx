@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  MapPinIcon, 
-  ClockIcon, 
-  CurrencyDollarIcon, 
+import {
+  MapPinIcon,
+  ClockIcon,
+  CurrencyDollarIcon,
   BookmarkIcon,
   EyeIcon,
   CalendarIcon,
-  BuildingOfficeIcon
+  BuildingOfficeIcon,
 } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolidIcon } from '@heroicons/react/24/solid';
 
@@ -28,10 +28,10 @@ const JobCard = ({ job, onBookmark, isBookmarked = false, onApply }) => {
     featured,
     applicationsCount = 0,
     viewsCount = 0,
-    companyId
+    companyId,
   } = job;
 
-  const formatSalary = (amount) => {
+  const formatSalary = amount => {
     if (amount >= 100000) {
       return `${(amount / 100000).toFixed(1)}L`;
     } else if (amount >= 1000) {
@@ -40,11 +40,11 @@ const JobCard = ({ job, onBookmark, isBookmarked = false, onApply }) => {
     return amount.toString();
   };
 
-  const timeAgo = (timestamp) => {
+  const timeAgo = timestamp => {
     const now = Date.now();
     const diff = now - timestamp;
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    
+
     if (days === 0) return 'Today';
     if (days === 1) return '1 day ago';
     if (days < 7) return `${days} days ago`;
@@ -178,9 +178,7 @@ const JobCard = ({ job, onBookmark, isBookmarked = false, onApply }) => {
             <EyeIcon className="w-4 h-4" />
             <span>{viewsCount} views</span>
           </div>
-          <div>
-            {applicationsCount} applications
-          </div>
+          <div>{applicationsCount} applications</div>
         </div>
 
         <motion.button

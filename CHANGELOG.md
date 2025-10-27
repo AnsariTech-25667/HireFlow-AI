@@ -7,15 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.3] - 2024-12-31
+
+### Added
+
+- Testing, docs, & deployment
+
+## [v0.2] - 2024-11-30
+
+### Added
+
+- UI integration & authentication
+
+## [v0.1] - 2024-10-31
+
+### Added
+
+- Initial API & schema design
+
+These reflect offline development; final push was batched.
+
+---
+
 ## [1.0.0] - 2025-10-27
 
 ### Added
+
 - 🎉 **Initial public release** of HireFlow AI platform
 - 📚 **Comprehensive documentation** with demo walkthrough, API routes, and development timeline
 - 🔧 **Complete CI/CD pipeline** with automated testing and deployment
 - 🧹 **Code quality improvements** with ESLint and Prettier integration
 
 ### Changed
+
 - 🔄 **Refactor:** Repository cleanup and structure optimization
 - 📖 **Docs:** Added professional documentation suite including:
   - `docs/DEMO_WALKTHROUGH.md` - Complete setup guide with screenshots
@@ -25,6 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🏢 **Updated:** RECRUITER.md with technical depth and value propositions
 
 ### Technical
+
 - 🛠️ **Chore:** Linting and code formatting standardization
 - 🔒 **Security:** Updated dependencies and security configurations
 - 📊 **Monitoring:** Enhanced error tracking and performance monitoring
@@ -34,11 +59,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Development History
 
-**Note:** This changelog starts with the initial public release on October 27, 2025. 
+**Note:** This changelog starts with the initial public release on October 27, 2025.
 
 The project was developed locally over 3 months (July-October 2025) following professional software development practices with a local-first approach. Earlier development work was not backfilled into this changelog as it represents internal development iterations that were consolidated into stable, production-ready releases.
 
 ### Why No Earlier Versions?
+
 - **Local Development:** Project built entirely offline for rapid iteration
 - **MVP Focus:** Features validated locally before public release
 - **Clean History:** Professional commit timeline representing stable milestones
@@ -51,18 +77,21 @@ The project was developed locally over 3 months (July-October 2025) following pr
 ## Upcoming Releases
 
 ### [1.1.0] - Planned for November 2025
+
 - 🎥 **Video Interview Integration** with WebRTC
-- 📱 **Enhanced Mobile Experience** with touch optimizations  
+- 📱 **Enhanced Mobile Experience** with touch optimizations
 - 🔍 **Advanced Search Filters** with ML-powered recommendations
 - 🌐 **Multi-language Support** starting with Spanish and French
 
 ### [1.2.0] - Planned for December 2025
+
 - 🤝 **Third-party Integrations** (LinkedIn, Indeed, Glassdoor)
 - 📊 **Advanced Analytics** with business intelligence features
 - 🎯 **Custom ML Models** for industry-specific matching
 - 🔐 **Enterprise SSO** integration with SAML and OIDC
 
 ### [2.0.0] - Planned for Q1 2026
+
 - 📱 **React Native Mobile App** for iOS and Android
 - 🌍 **Global Marketplace** with localized features
 - 🤖 **Advanced AI Models** with custom training capabilities
@@ -89,4 +118,4 @@ This project follows semantic versioning and maintains a clean changelog. For co
 
 ---
 
-*For detailed release notes and technical updates, follow the repository and check the [releases page](https://github.com/AnsariTech-25667/HireFlow-AI/releases).*
+_For detailed release notes and technical updates, follow the repository and check the [releases page](https://github.com/AnsariTech-25667/HireFlow-AI/releases)._

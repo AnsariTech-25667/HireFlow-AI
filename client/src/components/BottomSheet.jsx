@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, PanInfo } from 'framer-motion'
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import useSwipeGestures from '../hooks/useSwipeGestures'
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, PanInfo } from 'framer-motion';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import useSwipeGestures from '../hooks/useSwipeGestures';
 
-const BottomSheet = ({ 
-  isOpen, 
-  onClose, 
-  children, 
+const BottomSheet = ({
+  isOpen,
+  onClose,
+  children,
   title,
   snapPoints = [0.3, 0.6, 0.9],
   initialSnap = 1,
@@ -14,130 +14,130 @@ const BottomSheet = ({
   showCloseButton = true,
   closeOnSwipeDown = true,
   backdrop = true,
-  className = ''
+  className = '',
 }) => {
-  const [currentSnap, setCurrentSnap] = useState(initialSnap)
-  const [isDragging, setIsDragging] = useState(false)
-  const containerRef = useRef(null)
-  const contentRef = useRef(null)
+  const [currentSnap, setCurrentSnap] = useState(initialSnap);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef(null);
+  const contentRef = useRef(null);
 
   // Calculate heights based on viewport
-  const getSnapHeight = (snapIndex) => {
-    if (typeof window === 'undefined') return 0
-    return window.innerHeight * snapPoints[snapIndex]
-  }
+  const getSnapHeight = snapIndex => {
+    if (typeof window === 'undefined') return 0;
+    return window.innerHeight * snapPoints[snapIndex];
+  };
 
-  const currentHeight = getSnapHeight(currentSnap)
+  const currentHeight = getSnapHeight(currentSnap);
 
   // Handle drag end to snap to nearest point
   const handleDragEnd = (event, info) => {
-    setIsDragging(false)
-    
-    const velocity = info.velocity.y
-    const currentY = info.point.y
-    const viewportHeight = window.innerHeight
-    
+    setIsDragging(false);
+
+    const velocity = info.velocity.y;
+    const currentY = info.point.y;
+    const viewportHeight = window.innerHeight;
+
     // Calculate which snap point we're closest to
-    let targetSnap = currentSnap
-    
+    let targetSnap = currentSnap;
+
     if (velocity > 500) {
       // Fast swipe down
       if (currentSnap > 0) {
-        targetSnap = currentSnap - 1
+        targetSnap = currentSnap - 1;
       } else if (closeOnSwipeDown) {
-        onClose()
-        return
+        onClose();
+        return;
       }
     } else if (velocity < -500) {
       // Fast swipe up
       if (currentSnap < snapPoints.length - 1) {
-        targetSnap = currentSnap + 1
+        targetSnap = currentSnap + 1;
       }
     } else {
       // Slow drag - snap to nearest
-      const currentRatio = (viewportHeight - currentY) / viewportHeight
-      
-      let closestSnap = 0
-      let closestDistance = Math.abs(snapPoints[0] - currentRatio)
-      
+      const currentRatio = (viewportHeight - currentY) / viewportHeight;
+
+      let closestSnap = 0;
+      let closestDistance = Math.abs(snapPoints[0] - currentRatio);
+
       snapPoints.forEach((point, index) => {
-        const distance = Math.abs(point - currentRatio)
+        const distance = Math.abs(point - currentRatio);
         if (distance < closestDistance) {
-          closestDistance = distance
-          closestSnap = index
+          closestDistance = distance;
+          closestSnap = index;
         }
-      })
-      
-      targetSnap = closestSnap
+      });
+
+      targetSnap = closestSnap;
     }
 
     if (targetSnap < 0 && closeOnSwipeDown) {
-      onClose()
+      onClose();
     } else {
-      setCurrentSnap(Math.max(0, Math.min(snapPoints.length - 1, targetSnap)))
+      setCurrentSnap(Math.max(0, Math.min(snapPoints.length - 1, targetSnap)));
     }
-  }
+  };
 
   // Swipe gesture handling
   const swipeRef = useSwipeGestures({
-    onSwipeDown: (swipeData) => {
+    onSwipeDown: swipeData => {
       if (closeOnSwipeDown && currentSnap === 0) {
-        onClose()
+        onClose();
       } else if (currentSnap > 0) {
-        setCurrentSnap(currentSnap - 1)
+        setCurrentSnap(currentSnap - 1);
       }
     },
     onSwipeUp: () => {
       if (currentSnap < snapPoints.length - 1) {
-        setCurrentSnap(currentSnap + 1)
+        setCurrentSnap(currentSnap + 1);
       }
     },
     threshold: 50,
-    trackTouch: true
-  })
+    trackTouch: true,
+  });
 
   // Handle escape key
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleEscape = e => {
       if (e.key === 'Escape' && isOpen) {
-        onClose()
+        onClose();
       }
-    }
+    };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen, onClose])
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
 
   const backdropVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  }
+    visible: { opacity: 1 },
+  };
 
   const sheetVariants = {
-    hidden: { 
+    hidden: {
       y: '100%',
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 25,
-        stiffness: 300
-      }
+        stiffness: 300,
+      },
     },
-    visible: { 
-      y: `${100 - (snapPoints[currentSnap] * 100)}%`,
+    visible: {
+      y: `${100 - snapPoints[currentSnap] * 100}%`,
       transition: {
-        type: "spring",
+        type: 'spring',
         damping: 25,
-        stiffness: 300
-      }
-    }
-  }
+        stiffness: 300,
+      },
+    },
+  };
 
   return (
     <AnimatePresence>
@@ -172,17 +172,17 @@ const BottomSheet = ({
               dragElastic={0.1}
               onDragStart={() => setIsDragging(true)}
               onDragEnd={handleDragEnd}
-              whileDrag={{ 
-                boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                scale: 0.98
+              whileDrag={{
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+                scale: 0.98,
               }}
             >
               {/* Handle */}
               {showHandle && (
                 <div className="flex justify-center py-3">
-                  <motion.div 
+                  <motion.div
                     className="w-12 h-1.5 bg-gray-300 dark:bg-gray-600 rounded-full cursor-grab active:cursor-grabbing"
-                    whileHover={{ scale: 1.1, backgroundColor: "#9ca3af" }}
+                    whileHover={{ scale: 1.1, backgroundColor: '#9ca3af' }}
                     whileTap={{ scale: 0.95 }}
                   />
                 </div>
@@ -210,17 +210,15 @@ const BottomSheet = ({
               )}
 
               {/* Content */}
-              <div 
+              <div
                 ref={contentRef}
                 className="flex-1 overflow-y-auto overscroll-behavior-contain"
-                style={{ 
+                style={{
                   height: showHandle || title ? 'calc(100% - 80px)' : '100%',
-                  WebkitOverflowScrolling: 'touch'
+                  WebkitOverflowScrolling: 'touch',
                 }}
               >
-                <div className="p-6">
-                  {children}
-                </div>
+                <div className="p-6">{children}</div>
               </div>
 
               {/* Snap Indicators */}
@@ -231,8 +229,8 @@ const BottomSheet = ({
                       key={index}
                       onClick={() => setCurrentSnap(index)}
                       className={`w-2 h-8 rounded-full transition-colors ${
-                        index === currentSnap 
-                          ? 'bg-primary-500' 
+                        index === currentSnap
+                          ? 'bg-primary-500'
                           : 'bg-gray-300 dark:bg-gray-600'
                       }`}
                       whileHover={{ scale: 1.2 }}
@@ -246,7 +244,7 @@ const BottomSheet = ({
         </div>
       )}
     </AnimatePresence>
-  )
-}
+  );
+};
 
-export default BottomSheet
+export default BottomSheet;

@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useWebSocket } from '../context/WebSocketContext'
-import { 
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useWebSocket } from '../context/WebSocketContext';
+import {
   ChatBubbleLeftRightIcon,
   XMarkIcon,
   PaperAirplaneIcon,
@@ -9,52 +9,62 @@ import {
   BuildingOfficeIcon,
   ClockIcon,
   CheckCircleIcon,
-  EyeIcon
-} from '@heroicons/react/24/outline'
+  EyeIcon,
+} from '@heroicons/react/24/outline';
 
-const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState([])
-  const [newMessage, setNewMessage] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
-  const [onlineUsers, setOnlineUsers] = useState([])
-  const messagesEndRef = useRef(null)
-  const typingTimeoutRef = useRef(null)
-  
-  const { sendMessage, lastMessage, isConnected } = useWebSocket()
+const RealTimeChat = ({
+  jobId,
+  applicationId,
+  recipientType = 'recruiter',
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const [newMessage, setNewMessage] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const messagesEndRef = useRef(null);
+  const typingTimeoutRef = useRef(null);
+
+  const { sendMessage, lastMessage, isConnected } = useWebSocket();
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    scrollToBottom();
+  }, [messages]);
 
   // Handle incoming WebSocket messages
   useEffect(() => {
     if (lastMessage) {
       switch (lastMessage.type) {
         case 'CHAT_MESSAGE':
-          if (lastMessage.data.jobId === jobId || lastMessage.data.applicationId === applicationId) {
-            setMessages(prev => [...prev, lastMessage.data])
+          if (
+            lastMessage.data.jobId === jobId ||
+            lastMessage.data.applicationId === applicationId
+          ) {
+            setMessages(prev => [...prev, lastMessage.data]);
           }
-          break
+          break;
         case 'USER_TYPING':
           if (lastMessage.data.jobId === jobId) {
-            setIsTyping(true)
-            clearTimeout(typingTimeoutRef.current)
-            typingTimeoutRef.current = setTimeout(() => setIsTyping(false), 3000)
+            setIsTyping(true);
+            clearTimeout(typingTimeoutRef.current);
+            typingTimeoutRef.current = setTimeout(
+              () => setIsTyping(false),
+              3000
+            );
           }
-          break
+          break;
         case 'ONLINE_USERS':
-          setOnlineUsers(lastMessage.data.users || [])
-          break
+          setOnlineUsers(lastMessage.data.users || []);
+          break;
         default:
-          break
+          break;
       }
     }
-  }, [lastMessage, jobId, applicationId])
+  }, [lastMessage, jobId, applicationId]);
 
   // Load chat history
   useEffect(() => {
@@ -64,14 +74,14 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
         data: {
           jobId,
           applicationId,
-          recipientType
-        }
-      })
+          recipientType,
+        },
+      });
     }
-  }, [isOpen, isConnected, jobId, applicationId, recipientType, sendMessage])
+  }, [isOpen, isConnected, jobId, applicationId, recipientType, sendMessage]);
 
   const handleSendMessage = () => {
-    if (!newMessage.trim() || !isConnected) return
+    if (!newMessage.trim() || !isConnected) return;
 
     const message = {
       id: Date.now(),
@@ -80,39 +90,39 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
       senderType: recipientType === 'recruiter' ? 'candidate' : 'recruiter',
       timestamp: Date.now(),
       jobId,
-      applicationId
-    }
+      applicationId,
+    };
 
     sendMessage({
       type: 'CHAT_MESSAGE',
-      data: message
-    })
+      data: message,
+    });
 
-    setMessages(prev => [...prev, message])
-    setNewMessage('')
-  }
+    setMessages(prev => [...prev, message]);
+    setNewMessage('');
+  };
 
-  const handleTyping = (e) => {
-    setNewMessage(e.target.value)
-    
+  const handleTyping = e => {
+    setNewMessage(e.target.value);
+
     if (isConnected) {
       sendMessage({
         type: 'USER_TYPING',
         data: {
           jobId,
           applicationId,
-          userId: 'current_user'
-        }
-      })
+          userId: 'current_user',
+        },
+      });
     }
-  }
+  };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
+      e.preventDefault();
+      handleSendMessage();
     }
-  }
+  };
 
   return (
     <>
@@ -127,16 +137,22 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
         transition={{ delay: 1.5 }}
       >
         <ChatBubbleLeftRightIcon className="w-5 h-5" />
-        
+
         {/* Connection indicator */}
-        <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${
-          isConnected ? 'bg-green-400' : 'bg-red-400'
-        } animate-pulse`}></div>
-        
+        <div
+          className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${
+            isConnected ? 'bg-green-400' : 'bg-red-400'
+          } animate-pulse`}
+        ></div>
+
         {/* Unread messages indicator */}
-        {messages.filter(m => m.sender !== 'current_user' && !m.read).length > 0 && (
+        {messages.filter(m => m.sender !== 'current_user' && !m.read).length >
+          0 && (
           <div className="absolute -top-2 -left-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center text-xs font-bold">
-            {messages.filter(m => m.sender !== 'current_user' && !m.read).length}
+            {
+              messages.filter(m => m.sender !== 'current_user' && !m.read)
+                .length
+            }
           </div>
         )}
       </motion.button>
@@ -159,12 +175,16 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
                     <div>
                       <h3 className="font-semibold text-sm">Live Chat</h3>
                       <p className="text-xs opacity-90">
-                        {recipientType === 'recruiter' ? 'with Recruiter' : 'with Candidate'}
+                        {recipientType === 'recruiter'
+                          ? 'with Recruiter'
+                          : 'with Candidate'}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-300' : 'bg-red-300'}`}></div>
+                    <div
+                      className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-300' : 'bg-red-300'}`}
+                    ></div>
                     <button
                       onClick={() => setIsOpen(false)}
                       className="p-1 rounded-lg hover:bg-white/20"
@@ -195,7 +215,7 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
                     <p className="text-sm">Start the conversation!</p>
                   </div>
                 ) : (
-                  messages.map((message) => (
+                  messages.map(message => (
                     <motion.div
                       key={message.id}
                       initial={{ opacity: 0, y: 20 }}
@@ -211,20 +231,29 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
                           )}
                         </div>
                       )}
-                      <div className={`max-w-[70%] p-2 rounded-xl text-sm ${
-                        message.sender === 'current_user'
-                          ? 'bg-green-500 text-white rounded-br-md'
-                          : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-bl-md'
-                      }`}>
+                      <div
+                        className={`max-w-[70%] p-2 rounded-xl text-sm ${
+                          message.sender === 'current_user'
+                            ? 'bg-green-500 text-white rounded-br-md'
+                            : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-bl-md'
+                        }`}
+                      >
                         <p>{message.text}</p>
                         <div className="flex items-center justify-between mt-1">
                           <p className="text-xs opacity-70">
-                            {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            {new Date(message.timestamp).toLocaleTimeString(
+                              [],
+                              { hour: '2-digit', minute: '2-digit' }
+                            )}
                           </p>
                           {message.sender === 'current_user' && (
                             <div className="flex items-center gap-1">
-                              {message.delivered && <CheckCircleIcon className="w-3 h-3 opacity-70" />}
-                              {message.read && <EyeIcon className="w-3 h-3 opacity-70" />}
+                              {message.delivered && (
+                                <CheckCircleIcon className="w-3 h-3 opacity-70" />
+                              )}
+                              {message.read && (
+                                <EyeIcon className="w-3 h-3 opacity-70" />
+                              )}
                             </div>
                           )}
                         </div>
@@ -232,7 +261,7 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
                     </motion.div>
                   ))
                 )}
-                
+
                 {/* Typing Indicator */}
                 <AnimatePresence>
                   {isTyping && (
@@ -248,8 +277,14 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
                       <div className="bg-gray-100 dark:bg-gray-800 p-2 rounded-xl rounded-bl-md">
                         <div className="flex gap-1">
                           <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></div>
-                          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          <div
+                            className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                            style={{ animationDelay: '0.1s' }}
+                          ></div>
+                          <div
+                            className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"
+                            style={{ animationDelay: '0.2s' }}
+                          ></div>
                         </div>
                       </div>
                     </motion.div>
@@ -266,7 +301,9 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
                     value={newMessage}
                     onChange={handleTyping}
                     onKeyPress={handleKeyPress}
-                    placeholder={isConnected ? "Type a message..." : "Connecting..."}
+                    placeholder={
+                      isConnected ? 'Type a message...' : 'Connecting...'
+                    }
                     disabled={!isConnected}
                     className="flex-1 px-3 py-2 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm disabled:opacity-50"
                   />
@@ -286,7 +323,7 @@ const RealTimeChat = ({ jobId, applicationId, recipientType = 'recruiter' }) => 
         )}
       </AnimatePresence>
     </>
-  )
-}
+  );
+};
 
-export default RealTimeChat
+export default RealTimeChat;

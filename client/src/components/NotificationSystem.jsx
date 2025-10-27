@@ -1,105 +1,118 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { 
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import {
   BellIcon,
   ChatBubbleLeftRightIcon,
   CheckCircleIcon,
   ExclamationTriangleIcon,
   InformationCircleIcon,
-  XMarkIcon
-} from '@heroicons/react/24/outline'
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 
 const NotificationSystem = () => {
-  const [notifications, setNotifications] = useState([])
-  const [isOpen, setIsOpen] = useState(false)
+  const [notifications, setNotifications] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   // Simulate real-time notifications
   useEffect(() => {
     const generateNotification = () => {
-      const types = ['success', 'warning', 'info', 'message']
+      const types = ['success', 'warning', 'info', 'message'];
       const messages = {
         success: [
           'Your application has been viewed by the recruiter!',
           'New job match found based on your profile',
-          'Resume analysis completed - 95% ATS score!'
+          'Resume analysis completed - 95% ATS score!',
         ],
         warning: [
           'Application deadline approaching in 2 days',
           'Your profile is missing key skills for this role',
-          'Interview scheduled - prepare your answers'
+          'Interview scheduled - prepare your answers',
         ],
         info: [
           'Market salary data updated for your field',
           '15 new jobs posted in your area today',
-          'Career tips: How to ace technical interviews'
+          'Career tips: How to ace technical interviews',
         ],
         message: [
           'Recruiter from TechCorp sent you a message',
           'AI Assistant: Ready to help with interview prep',
-          'New connection request from hiring manager'
-        ]
-      }
+          'New connection request from hiring manager',
+        ],
+      };
 
-      const type = types[Math.floor(Math.random() * types.length)]
-      const message = messages[type][Math.floor(Math.random() * messages[type].length)]
+      const type = types[Math.floor(Math.random() * types.length)];
+      const message =
+        messages[type][Math.floor(Math.random() * messages[type].length)];
 
       const notification = {
         id: Date.now(),
         type,
         message,
         timestamp: Date.now(),
-        read: false
-      }
+        read: false,
+      };
 
-      setNotifications(prev => [notification, ...prev.slice(0, 9)]) // Keep only 10 notifications
-    }
+      setNotifications(prev => [notification, ...prev.slice(0, 9)]); // Keep only 10 notifications
+    };
 
     // Generate initial notifications
-    generateNotification()
-    
+    generateNotification();
+
     // Generate new notifications every 15-30 seconds
-    const interval = setInterval(() => {
-      if (Math.random() > 0.3) { // 70% chance to generate
-        generateNotification()
-      }
-    }, 15000 + Math.random() * 15000)
+    const interval = setInterval(
+      () => {
+        if (Math.random() > 0.3) {
+          // 70% chance to generate
+          generateNotification();
+        }
+      },
+      15000 + Math.random() * 15000
+    );
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
-  const getIcon = (type) => {
+  const getIcon = type => {
     switch (type) {
-      case 'success': return CheckCircleIcon
-      case 'warning': return ExclamationTriangleIcon
-      case 'info': return InformationCircleIcon
-      case 'message': return ChatBubbleLeftRightIcon
-      default: return BellIcon
+      case 'success':
+        return CheckCircleIcon;
+      case 'warning':
+        return ExclamationTriangleIcon;
+      case 'info':
+        return InformationCircleIcon;
+      case 'message':
+        return ChatBubbleLeftRightIcon;
+      default:
+        return BellIcon;
     }
-  }
+  };
 
-  const getColor = (type) => {
+  const getColor = type => {
     switch (type) {
-      case 'success': return 'from-green-500 to-emerald-500'
-      case 'warning': return 'from-yellow-500 to-orange-500'
-      case 'info': return 'from-blue-500 to-cyan-500'
-      case 'message': return 'from-purple-500 to-violet-500'
-      default: return 'from-gray-500 to-gray-600'
+      case 'success':
+        return 'from-green-500 to-emerald-500';
+      case 'warning':
+        return 'from-yellow-500 to-orange-500';
+      case 'info':
+        return 'from-blue-500 to-cyan-500';
+      case 'message':
+        return 'from-purple-500 to-violet-500';
+      default:
+        return 'from-gray-500 to-gray-600';
     }
-  }
+  };
 
-  const markAsRead = (id) => {
-    setNotifications(prev => 
-      prev.map(notif => 
-        notif.id === id ? { ...notif, read: true } : notif
-      )
-    )
-  }
+  const markAsRead = id => {
+    setNotifications(prev =>
+      prev.map(notif => (notif.id === id ? { ...notif, read: true } : notif))
+    );
+  };
 
-  const removeNotification = (id) => {
-    setNotifications(prev => prev.filter(notif => notif.id !== id))
-  }
+  const removeNotification = id => {
+    setNotifications(prev => prev.filter(notif => notif.id !== id));
+  };
 
-  const unreadCount = notifications.filter(n => !n.read).length
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   return (
     <div className="fixed top-4 right-4 z-50">
@@ -111,7 +124,7 @@ const NotificationSystem = () => {
         whileTap={{ scale: 0.95 }}
       >
         <BellIcon className="w-6 h-6 text-gray-700 dark:text-gray-300" />
-        
+
         {unreadCount > 0 && (
           <motion.div
             initial={{ scale: 0 }}
@@ -153,36 +166,45 @@ const NotificationSystem = () => {
               </div>
             ) : (
               <div className="space-y-1">
-                {notifications.map((notification) => {
-                  const Icon = getIcon(notification.type)
+                {notifications.map(notification => {
+                  const Icon = getIcon(notification.type);
                   return (
                     <motion.div
                       key={notification.id}
                       initial={{ opacity: 0, x: 50 }}
                       animate={{ opacity: 1, x: 0 }}
                       className={`p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer border-l-4 ${
-                        notification.read 
-                          ? 'border-gray-200 dark:border-gray-700 opacity-70' 
+                        notification.read
+                          ? 'border-gray-200 dark:border-gray-700 opacity-70'
                           : `border-transparent bg-gradient-to-r ${getColor(notification.type)} bg-opacity-10`
                       }`}
                       onClick={() => markAsRead(notification.id)}
                     >
                       <div className="flex gap-3">
-                        <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${getColor(notification.type)} flex items-center justify-center flex-shrink-0`}>
+                        <div
+                          className={`w-8 h-8 rounded-full bg-gradient-to-r ${getColor(notification.type)} flex items-center justify-center flex-shrink-0`}
+                        >
                           <Icon className="w-4 h-4 text-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className={`text-sm ${notification.read ? 'text-gray-600 dark:text-gray-400' : 'text-gray-900 dark:text-gray-100 font-medium'}`}>
+                          <p
+                            className={`text-sm ${notification.read ? 'text-gray-600 dark:text-gray-400' : 'text-gray-900 dark:text-gray-100 font-medium'}`}
+                          >
                             {notification.message}
                           </p>
                           <p className="text-xs text-gray-500 mt-1">
-                            {new Date(notification.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            {new Date(
+                              notification.timestamp
+                            ).toLocaleTimeString([], {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
                           </p>
                         </div>
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            removeNotification(notification.id)
+                          onClick={e => {
+                            e.stopPropagation();
+                            removeNotification(notification.id);
                           }}
                           className="p-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors opacity-0 group-hover:opacity-100"
                         >
@@ -190,7 +212,7 @@ const NotificationSystem = () => {
                         </button>
                       </div>
                     </motion.div>
-                  )
+                  );
                 })}
               </div>
             )}
@@ -209,7 +231,7 @@ const NotificationSystem = () => {
         </motion.div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default NotificationSystem
+export default NotificationSystem;

@@ -1,43 +1,77 @@
 {
-    "name":  "hireflow-ai",
-    "version":  "1.0.0",
-    "description":  "HireFlow AI - Next-Generation AI-Powered Hiring Platform",
-    "main":  "index.js",
-    "scripts":  {
-                    "install:all":  "npm install \u0026\u0026 cd client \u0026\u0026 npm install \u0026\u0026 cd ../server \u0026\u0026 npm install",
-                    "dev":  "concurrently \"cd server \u0026\u0026 npm run dev\" \"cd client \u0026\u0026 npm run dev\"",
-                    "build":  "cd client \u0026\u0026 npm run build",
-                    "start":  "cd server \u0026\u0026 npm start",
-                    "test":  "concurrently \"cd client \u0026\u0026 npm test\" \"cd server \u0026\u0026 npm test\"",
-                    "lint":  "concurrently \"cd client \u0026\u0026 npm run lint\" \"cd server \u0026\u0026 npm run lint\"",
-                    "format":  "concurrently \"cd client \u0026\u0026 npm run format\" \"cd server \u0026\u0026 npm run format\""
-                },
-    "keywords":  [
-                     "hireflow-ai",
-                     "ai-recruitment",
-                     "real-time-hiring",
-                     "mern-stack",
-                     "react",
-                     "nodejs",
-                     "express",
-                     "mongodb",
-                     "ai-powered",
-                     "job-portal"
-                 ],
-    "author":  "Maaz Ansari \u003cmaazansari25667@gmail.com\u003e",
-    "license":  "MIT",
-    "repository":  {
-                       "type":  "git",
-                       "url":  "https://github.com/AnsariTech-25667/HireFlow-AI.git"
-                   },
-    "bugs":  {
-                 "url":  "https://github.com/AnsariTech-25667/HireFlow-AI/issues"
-             },
-    "homepage":  "https://github.com/AnsariTech-25667/HireFlow-AI#readme",
-    "dependencies":  {
-                         "puppeteer":  "^24.26.0"
-                     },
-    "devDependencies":  {
-                            "concurrently":  "^9.0.1"
-                        }
+  "name": "hireflow-ai",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "HireFlow AI - Next-Generation AI-Powered Hiring Platform",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky",
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "dev": "concurrently \"cd server && npm run server\" \"cd client && npm run dev\"",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "test": "npm run test:all",
+    "test:client": "cd client && npm test",
+    "test:server": "cd server && npm test",
+    "test:all": "npm run test:server && npm run test:client",
+    "test:coverage": "npm run test:coverage:server && npm run test:coverage:client",
+    "test:coverage:client": "cd client && npm run test:coverage",
+    "test:coverage:server": "cd server && npm run test:coverage",
+    "lint": "eslint .",
+    "format": "prettier -w .",
+    "lint:client": "cd client && npm run lint",
+    "lint:server": "cd server && npm run lint",
+    "format:client": "cd client && npm run format",
+    "format:server": "cd server && npm run format",
+    "secret-scan": "node scripts/secret-scan.js"
+  },
+  "keywords": [
+    "hireflow-ai",
+    "ai-recruitment",
+    "real-time-hiring",
+    "mern-stack",
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "ai-powered",
+    "job-portal"
+  ],
+  "author": "Maaz Ansari <maazansari25667@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AnsariTech-25667/HireFlow-AI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AnsariTech-25667/HireFlow-AI/issues"
+  },
+  "homepage": "https://github.com/AnsariTech-25667/HireFlow-AI#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.10",
+    "puppeteer": "^24.26.0",
+    "vitest": "^4.0.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.38.0",
+    "concurrently": "^9.0.1",
+    "eslint": "^9.38.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write"
+    ],
+    "*.{json,md,css,html}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx,json,md}": [
+      "node scripts/secret-scan.js"
+    ]
+  }
 }
