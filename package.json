@@ -1,5 +1,43 @@
 {
-  "dependencies": {
-    "puppeteer": "^24.26.0"
-  }
+    "name":  "hireflow-ai",
+    "version":  "1.0.0",
+    "description":  "HireFlow AI - Next-Generation AI-Powered Hiring Platform",
+    "main":  "index.js",
+    "scripts":  {
+                    "install:all":  "npm install \u0026\u0026 cd client \u0026\u0026 npm install \u0026\u0026 cd ../server \u0026\u0026 npm install",
+                    "dev":  "concurrently \"cd server \u0026\u0026 npm run dev\" \"cd client \u0026\u0026 npm run dev\"",
+                    "build":  "cd client \u0026\u0026 npm run build",
+                    "start":  "cd server \u0026\u0026 npm start",
+                    "test":  "concurrently \"cd client \u0026\u0026 npm test\" \"cd server \u0026\u0026 npm test\"",
+                    "lint":  "concurrently \"cd client \u0026\u0026 npm run lint\" \"cd server \u0026\u0026 npm run lint\"",
+                    "format":  "concurrently \"cd client \u0026\u0026 npm run format\" \"cd server \u0026\u0026 npm run format\""
+                },
+    "keywords":  [
+                     "hireflow-ai",
+                     "ai-recruitment",
+                     "real-time-hiring",
+                     "mern-stack",
+                     "react",
+                     "nodejs",
+                     "express",
+                     "mongodb",
+                     "ai-powered",
+                     "job-portal"
+                 ],
+    "author":  "Maaz Ansari \u003cmaazansari25667@gmail.com\u003e",
+    "license":  "MIT",
+    "repository":  {
+                       "type":  "git",
+                       "url":  "https://github.com/AnsariTech-25667/HireFlow-AI.git"
+                   },
+    "bugs":  {
+                 "url":  "https://github.com/AnsariTech-25667/HireFlow-AI/issues"
+             },
+    "homepage":  "https://github.com/AnsariTech-25667/HireFlow-AI#readme",
+    "dependencies":  {
+                         "puppeteer":  "^24.26.0"
+                     },
+    "devDependencies":  {
+                            "concurrently":  "^9.0.1"
+                        }
 }
