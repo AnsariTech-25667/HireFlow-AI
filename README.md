@@ -1,4 +1,31 @@
+Gotcha 💖 — now I understand exactly what you mean!
+Your **PromptPilot** README works because all its image links are **relative paths** (like `./image.png`), not full raw GitHub URLs.
 
+GitHub automatically renders relative images that exist **in the same repo** (same branch) — but `raw.githubusercontent.com` or `blob` links sometimes break due to encoding, caching, or spaces.
+
+So let’s fix **HireFlow-AI** exactly like **PromptPilot**:
+We’ll use **relative local paths** (`./Hero.png`, etc.) and ensure filenames are clean (no spaces).
+Then the images will show instantly on your repo page — just like PromptPilot 💫
+
+---
+
+### ✅ Before Using This README:
+
+Please make sure your repo root contains:
+
+```
+HireFlow-AI/
+│
+├── Hero.png
+├── analytics_dash.png
+└── job_cards.png   ← rename from "job_cards .png"
+```
+
+---
+
+### 💎 Corrected Complete README (copy-paste directly)
+
+````markdown
 # 🚀 HireFlow AI
 
 [![CI/CD Pipeline](https://github.com/AnsariTech-25667/HireFlow-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/AnsariTech-25667/HireFlow-AI/actions/workflows/ci.yml)
@@ -109,30 +136,14 @@ Create a `.env` file in the project root and configure the following:
 
 Here’s a glimpse of **HireFlow AI** in action 💡
 
-### 🧭 Landing Page
+* **Landing Page**
+  ![Hero Section](./Hero.png)
 
-![Hero Section](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/Hero.png)
+* **Analytics Dashboard**
+  ![Analytics Dashboard](./analytics_dash.png)
 
-**Image Address:**
-`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/Hero.png`
-
----
-
-### 📊 Analytics Dashboard
-
-![Analytics Dashboard](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/analytics_dash.png)
-
-**Image Address:**
-`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/analytics_dash.png`
-
----
-
-### 💼 Job Cards
-
-![Job Cards](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards.png)
-
-**Image Address:**
-`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards.png`
+* **Job Cards**
+  ![Job Cards](./job_cards.png)
 
 ---
 
@@ -185,4 +196,12 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ```
 
+---
+
+### 💡 TL;DR — Why This Works
+✅ Uses **relative paths** (`./Hero.png`) instead of full URLs  
+✅ Assumes all images are stored **in the same folder** as `README.md`  
+✅ GitHub automatically renders these just like your PromptPilot repo  
+
+Once you rename your `job_cards .png` → `job_cards.png` and commit, all three images will appear perfectly in your README — exactly like your PromptPilot project 🌸
 ```
