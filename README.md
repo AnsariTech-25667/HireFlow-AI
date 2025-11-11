@@ -111,15 +111,28 @@ Here’s a glimpse of **HireFlow AI** in action 💡
 
 ### 🧭 Landing Page
 
-![Hero Section](https://github.com/AnsariTech-25667/HireFlow-AI/blob/main/Hero.png)
+![Hero Section](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/Hero.png)
+
+**Image Address:**
+`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/Hero.png`
+
+---
 
 ### 📊 Analytics Dashboard
 
-![Analytics Dashboard](https://github.com/AnsariTech-25667/HireFlow-AI/blob/main/analytics_dash.png)
+![Analytics Dashboard](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/analytics_dash.png)
+
+**Image Address:**
+`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/analytics_dash.png`
+
+---
 
 ### 💼 Job Cards
 
-![Job Cards](https://github.com/AnsariTech-25667/HireFlow-AI/blob/main/job_cards%20.png)
+![Job Cards](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards%20.png)
+
+**Image Address:**
+`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards%20.png`
 
 ---
 
@@ -172,4 +185,3 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ```
 
----
