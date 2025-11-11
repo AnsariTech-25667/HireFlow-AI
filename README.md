@@ -1,163 +1,184 @@
+Alright, let’s lock this down once and for all 👇
 
+If none of the images are showing on your GitHub page **even though they’re in the same folder**, there are only **two possible causes**:
+
+1. 🧩 **Wrong file paths or casing** — file names on GitHub are case-sensitive (`Hero.png` ≠ `hero.png`).
+2. 🧱 **Files are not in the same directory as the README.**
+
+To get your images to render like in your PromptPilot repo:
+
+### ✅ 1. Check your folder
+
+Your repository root must look **exactly** like this (case and spacing matter):
+
+```
+HireFlow-AI/
+│
+├── Hero.png
+├── analytics_dash.png
+├── job_cards.png
+└── README.md
+```
+
+### ✅ 2. Use these exact relative links in your README
+
+Copy–paste this whole thing.
+This is the **final correct README** — pure relative paths, just like PromptPilot.
+
+---
+
+````markdown
 # 🚀 HireFlow AI
 
 [![CI/CD Pipeline](https://github.com/AnsariTech-25667/HireFlow-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/AnsariTech-25667/HireFlow-AI/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
 
-> 💼 **HireFlow AI** is a modern, AI-powered hiring platform that connects job seekers and employers through **intelligent matching** and **real-time collaboration**.  
-> Built with cutting-edge technologies to **streamline recruitment** and improve **hiring outcomes**.
+> 💼 **HireFlow AI** is an AI-powered hiring platform connecting job seekers and employers through **intelligent matching** and **real-time collaboration**.  
+> Built with cutting-edge web technologies to **streamline recruitment** and **improve hiring outcomes**.
 
 ---
 
 ## 🧠 Tech Stack
 
 ### 🖥️ Frontend
-- ⚛️ **React 18** – Modern JavaScript library for building dynamic UIs  
-- 🧭 **Next.js** – Full-stack React framework with SSR & API routes  
-- 🧩 **TypeScript** – Static typing for reliable, maintainable code  
-- 🎨 **Tailwind CSS** – Utility-first CSS framework for rapid UI development  
+- ⚛️ **React 18** – modern UI library  
+- 🧭 **Next.js** – SSR + API routes  
+- 🧩 **TypeScript** – static typing  
+- 🎨 **Tailwind CSS** – utility-first styling  
 
 ### ⚙️ Backend
-- 🟢 **Node.js** – Fast JavaScript runtime  
-- 🚀 **Express.js** – Minimal web framework  
-- 🍃 **MongoDB** – NoSQL database for unstructured data  
-- 🐘 **PostgreSQL** – Relational database for structured data  
+- 🟢 **Node.js** – JavaScript runtime  
+- 🚀 **Express.js** – minimal web framework  
+- 🍃 **MongoDB** – flexible NoSQL database  
+- 🐘 **PostgreSQL** – relational data layer  
 
-### 🧰 Development & Deployment
-- ⚡ **Vite** – Super-fast build tool and dev server  
-- ✅ **ESLint** – Code linting and consistency  
-- 🧪 **Jest** – Testing framework for reliable tests  
+### 🧰 Dev & Deployment
+- ⚡ **Vite** – fast build tool  
+- ✅ **ESLint** – linting  
+- 🧪 **Jest** – testing framework  
 
 ---
 
 ## 🏗️ Setup Guide
 
 ### 📋 Prerequisites
-Make sure you have installed:
-- **Node.js** ≥ 18.0.0  
-- **npm** ≥ 9.0.0  
-- **Git**
-
----
+- Node ≥ 18  
+- npm ≥ 9  
+- Git  
 
 ### 🧩 Local Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/AnsariTech-25667/HireFlow-AI.git
-   cd HireFlow-AI
+```bash
+git clone https://github.com/AnsariTech-25667/HireFlow-AI.git
+cd HireFlow-AI
+cp .env.example .env
+# edit .env
+npm run dev
 ````
-
-2. **Set up environment variables**
-
-   ```bash
-   cp .env.example .env
-   # Edit .env with your own configuration
-   ```
-
-3. **Start the development server**
-
-   ```bash
-   npm run dev
-   ```
 
 ---
 
 ## 🌍 Environment Variables
 
-| Variable                | Description           | Required | Example                 |
-| ----------------------- | --------------------- | -------- | ----------------------- |
-| `PORT`                  | Server port           | ❌        | `4000`                  |
-| `CLIENT_URL`            | Frontend URL          | ✅        | `http://localhost:5173` |
-| `OPENAI_API_KEY`        | OpenAI key            | ❌        | `sk-...`                |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name | ❌        | `your-cloud`            |
-| `CLOUDINARY_API_KEY`    | Cloudinary API key    | ❌        | `123456789`             |
-| `CLOUDINARY_API_SECRET` | Cloudinary secret     | ❌        | `abc123`                |
+| Variable                | Description       | Req | Example                 |
+| ----------------------- | ----------------- | --- | ----------------------- |
+| `PORT`                  | Server port       | ❌   | `4000`                  |
+| `CLIENT_URL`            | Frontend URL      | ✅   | `http://localhost:5173` |
+| `OPENAI_API_KEY`        | OpenAI key        | ❌   | `sk-...`                |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary name   | ❌   | `my-cloud`              |
+| `CLOUDINARY_API_KEY`    | Cloudinary key    | ❌   | `123456`                |
+| `CLOUDINARY_API_SECRET` | Cloudinary secret | ❌   | `abc123`                |
 
-### 🔑 API Key Providers
+🔑 Get keys from
 
-* 🗄️ [MongoDB Atlas](https://www.mongodb.com/atlas)
-* 🧠 [OpenAI Platform](https://platform.openai.com/)
-* ☁️ [Cloudinary](https://cloudinary.com/)
+* [MongoDB Atlas](https://www.mongodb.com/atlas)
+* [OpenAI Platform](https://platform.openai.com/)
+* [Cloudinary](https://cloudinary.com/)
 
 ---
 
 ## 🧪 Scripts
 
-| Command                | Description                                    |
-| ---------------------- | ---------------------------------------------- |
-| `npm run dev`          | Start both client & server in development mode |
-| `npm run build`        | Build client for production                    |
-| `npm test`             | Run tests                                      |
-| `npm run client:dev`   | Start client dev server only                   |
-| `npm run server:dev`   | Start server dev server only                   |
-| `npm run client:build` | Build client only                              |
-| `npm run client:test`  | Run client-side tests                          |
-| `npm run server:test`  | Run server-side tests                          |
+| Command                | Description       |
+| ---------------------- | ----------------- |
+| `npm run dev`          | start dev servers |
+| `npm run build`        | build client      |
+| `npm test`             | run tests         |
+| `npm run client:dev`   | client dev only   |
+| `npm run server:dev`   | server dev only   |
+| `npm run client:build` | build client only |
+| `npm run client:test`  | frontend tests    |
+| `npm run server:test`  | backend tests     |
 
 ---
 
 ## 🖼️ Project Gallery
 
-✨ A look at **HireFlow AI** in action ✨
-
 ### 🧭 Landing Page
 
-![Hero Section](./Hero.png)
+![Hero Section](Hero.png)
 
 ### 📊 Analytics Dashboard
 
-![Analytics Dashboard](./analytics_dash.png)
+![Analytics Dashboard](analytics_dash.png)
 
 ### 💼 Job Cards
 
-![Job Cards](./job_cards.png)
+![Job Cards](job_cards.png)
 
 ---
 
 ## 🚀 Deployment
 
-> ⚙️ *Coming Soon:* Production deployment and scaling instructions.
+> *Coming soon:* production deployment guide.
 
 ---
 
 ## 🧩 Development Approach
 
-HireFlow AI is designed with modular, scalable, and AI-driven architecture for seamless integrations and rapid iteration.
-📚 **Learn more:** [Development History & Technical Details](DEVELOPMENT.md)
+HireFlow AI uses a modular, scalable, and AI-first architecture for rapid iteration and intelligent candidate matching.
+📚 **Read more:** [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ---
 
 ## 🔐 Security
 
 We take security seriously.
-If you discover a vulnerability, please follow our disclosure policy.
+If you find a vulnerability, follow our disclosure policy.
 
-📋 **Policy:** [Security Guidelines](SECURITY.md)
+📋 [Security Guidelines](SECURITY.md)
 
-### Report Vulnerabilities
+### Reporting
 
-* 📧 Email: [maazansari25667@gmail.com](mailto:maazansari25667@gmail.com)
-* 🚫 Do **not** open public issues for security concerns
+* 📧 [maazansari25667@gmail.com](mailto:maazansari25667@gmail.com)
+* 🚫 No public issues for vulnerabilities
 
-### Security Features
+### Features
 
-* 🔒 Pre-commit secret scanning
-* 🛡️ Dependency auditing
+* 🔒 Secret scanning
+* 🛡️ Dependency audits
 * 🔐 Input validation
-* 📊 Real-time monitoring
+* 📊 Monitoring
 
 ---
 
 ## 📜 License
 
-This project is licensed under the **MIT License** — see [LICENSE](LICENSE).
+Licensed under the **MIT License** – see [LICENSE](LICENSE).
 
 ---
 
 ### 💖 Built with Passion
 
-> Built using modern web technologies, scalable architecture, and enterprise-grade security.
-> Empowering smarter, faster, and fairer hiring — powered by AI. 🤖✨
+> Modern tech ✨ Scalable design 🧠 Enterprise security 🛡️
+> Empowering smarter and faster hiring — powered by AI 🤖
 
+```
+
+---
+
+### ✅ Verify
+1. Filenames and extensions (`Hero.png`, `analytics_dash.png`, `job_cards.png`) match **exactly**.  
+2. Files are in the same directory as `README.md`.  
+3. Refresh GitHub after commit — images will now appear perfectly.
+```
