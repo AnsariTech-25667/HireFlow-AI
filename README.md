@@ -129,10 +129,10 @@ Here’s a glimpse of **HireFlow AI** in action 💡
 
 ### 💼 Job Cards
 
-![Job Cards](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards%20.png)
+![Job Cards](https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards.png)
 
 **Image Address:**
-`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards%20.png`
+`https://raw.githubusercontent.com/AnsariTech-25667/HireFlow-AI/main/job_cards.png`
 
 ---
 
@@ -185,3 +185,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ```
 
+```
