@@ -1,24 +1,4 @@
 
-
-```bash
-git mv "job_cards .png" "job_cards.png"
-git commit -m "fix: rename job_cards image for README visibility"
-git push
-```
-
-Make sure there are **no spaces** in the filename, and the casing matches exactly (`job_cards.png` — all lowercase).
-
----
-
-### 💎 **Step 2 — Copy this final, fully corrected README.md**
-
-✅ Uses **relative paths** (works like your PromptPilot project)
-✅ All formatting fixed
-✅ Job cards now properly linked
-
----
-
-````markdown
 # 🚀 HireFlow AI
 
 [![CI/CD Pipeline](https://github.com/AnsariTech-25667/HireFlow-AI/actions/workflows/ci.yml/badge.svg)](https://github.com/AnsariTech-25667/HireFlow-AI/actions/workflows/ci.yml)
@@ -33,159 +13,131 @@ Built with cutting-edge technologies to **streamline recruitment** and improve *
 ## 🧠 Tech Stack
 
 ### 🖥️ Frontend
-
-- ⚛️ **React 18** – Modern JavaScript library for building dynamic UIs  
-- 🧭 **Next.js** – Full-stack React framework with SSR & API routes  
-- 🧩 **TypeScript** – Type-safe development for better reliability  
-- 🎨 **Tailwind CSS** – Utility-first CSS framework for rapid, elegant UI design  
+- ⚛️ **React 18** – modern UI library  
+- 🧭 **Next.js** – SSR + API routes  
+- 🧩 **TypeScript** – static typing  
+- 🎨 **Tailwind CSS** – utility-first styling  
 
 ### ⚙️ Backend
+- 🟢 **Node.js** – JS runtime  
+- 🚀 **Express.js** – minimal web framework  
+- 🍃 **MongoDB** – NoSQL storage  
+- 🐘 **PostgreSQL** – relational DB  
 
-- 🟢 **Node.js** – High-performance JavaScript runtime  
-- 🚀 **Express.js** – Fast and minimal web framework  
-- 🍃 **MongoDB** – Flexible NoSQL database for dynamic data  
-- 🐘 **PostgreSQL** – Reliable relational database for structured data  
-
-### 🧰 Development & Deployment
-
-- ⚡ **Vite** – Blazing-fast build tool and dev server  
-- ✅ **ESLint** – Code linting and quality assurance  
-- 🧪 **Jest** – Testing framework for unit and integration tests  
+### 🧰 Dev & Deployment
+- ⚡ **Vite** – ultra-fast builds  
+- ✅ **ESLint** – code linting  
+- 🧪 **Jest** – testing  
 
 ---
 
 ## 🏗️ Setup Guide
 
 ### 📋 Prerequisites
-
-Before running the project, ensure you have:
-
-- **Node.js** ≥ 18.0.0  
-- **npm** ≥ 9.0.0  
-- **Git** installed  
-
----
+- Node ≥ 18  
+- npm ≥ 9  
+- Git  
 
 ### 🧩 Local Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/AnsariTech-25667/HireFlow-AI.git
-   cd HireFlow-AI
+```bash
+git clone https://github.com/AnsariTech-25667/HireFlow-AI.git
+cd HireFlow-AI
+cp .env.example .env
+# edit .env with your keys
+npm run dev
 ````
-
-2. **Set up environment variables**
-
-   ```bash
-   cp .env.example .env
-   # Edit .env with your own configuration
-   ```
-
-3. **Start the development server**
-
-   ```bash
-   npm run dev
-   ```
 
 ---
 
 ## 🌍 Environment Variables
 
-Create a `.env` file in the project root and configure the following:
+| Variable                | Description       | Req | Example                 |
+| ----------------------- | ----------------- | --- | ----------------------- |
+| `PORT`                  | Server port       | ❌   | `4000`                  |
+| `CLIENT_URL`            | Frontend URL      | ✅   | `http://localhost:5173` |
+| `OPENAI_API_KEY`        | OpenAI key        | ❌   | `sk-...`                |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary name   | ❌   | `your-cloud`            |
+| `CLOUDINARY_API_KEY`    | Cloudinary key    | ❌   | `123456`                |
+| `CLOUDINARY_API_SECRET` | Cloudinary secret | ❌   | `abc123`                |
 
-| Variable                | Description                    | Required | Example                 |
-| ----------------------- | ------------------------------ | -------- | ----------------------- |
-| `PORT`                  | Server port number             | ❌        | `4000`                  |
-| `CLIENT_URL`            | Frontend application URL       | ✅        | `http://localhost:5173` |
-| `OPENAI_API_KEY`        | OpenAI API key for AI features | ❌        | `sk-...`                |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name          | ❌        | `your-cloud-name`       |
-| `CLOUDINARY_API_KEY`    | Cloudinary API key             | ❌        | `123456789`             |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret          | ❌        | `your-api-secret`       |
+🔑 Get Keys
 
-### 🔑 Getting API Keys
-
-* 🗄️ **MongoDB** → [MongoDB Atlas](https://www.mongodb.com/atlas)
-* 🧠 **OpenAI** → [OpenAI Platform](https://platform.openai.com/)
-* ☁️ **Cloudinary** → [Cloudinary](https://cloudinary.com/)
+* [MongoDB Atlas](https://www.mongodb.com/atlas)
+* [OpenAI Platform](https://platform.openai.com/)
+* [Cloudinary](https://cloudinary.com/)
 
 ---
 
 ## 🧪 Scripts
 
-| Command                | Description                                    |
-| ---------------------- | ---------------------------------------------- |
-| `npm run dev`          | Start both client & server in development mode |
-| `npm run build`        | Build client for production                    |
-| `npm test`             | Run tests for both client & server             |
-| `npm run client:dev`   | Run client-side dev server only                |
-| `npm run server:dev`   | Run server-side dev server only                |
-| `npm run client:build` | Build client-side code                         |
-| `npm run client:test`  | Run frontend tests                             |
-| `npm run server:test`  | Run backend tests                              |
+| Command                | Description                      |
+| ---------------------- | -------------------------------- |
+| `npm run dev`          | Start dev mode (client + server) |
+| `npm run build`        | Build client                     |
+| `npm test`             | Run all tests                    |
+| `npm run client:dev`   | Client dev only                  |
+| `npm run server:dev`   | Server dev only                  |
+| `npm run client:build` | Build client only                |
+| `npm run client:test`  | Frontend tests                   |
+| `npm run server:test`  | Backend tests                    |
 
 ---
 
 ## 🖼️ Project Gallery
 
-Here’s a glimpse of **HireFlow AI** in action 💡
+✨ A quick look at **HireFlow AI** ✨
 
-* **Landing Page**
-  ![Hero Section](./Hero.png)
+**Landing Page**
+![Hero Section](./Hero.png)
 
-* **Analytics Dashboard**
-  ![Analytics Dashboard](./analytics_dash.png)
+**Analytics Dashboard**
+![Analytics Dashboard](./analytics_dash.png)
 
-* **Job Cards**
-  ![Job Cards](./job_cards.png)
+**Job Cards**
+![Job Cards](./job_cards.png)
 
 ---
 
 ## 🚀 Deployment
 
-> ⚙️ *Coming Soon:* Production deployment instructions for hosting and scaling HireFlow AI.
+> *Coming soon:* Production setup & hosting guide.
 
 ---
 
 ## 🧩 Development Approach
 
-HireFlow AI follows a modular, scalable, and AI-first architecture — enabling rapid iteration and seamless integration of intelligent matching features.
-
-📚 **Read More:** [Development History & Technical Details](DEVELOPMENT.md)
+Modular, scalable, AI-first architecture enabling rapid iteration and smart matching.
+📚 See [DEVELOPMENT.md](DEVELOPMENT.md)
 
 ---
 
 ## 🔐 Security
 
-We take security **very seriously**.
-If you discover a vulnerability, please follow our responsible disclosure policy.
+We take security seriously.
+If you find a vulnerability, follow our disclosure policy.
+📋 See [SECURITY.md](SECURITY.md)
 
-📋 **Security Policy:** [View Security Guidelines](SECURITY.md)
+**Report to:** [maazansari25667@gmail.com](mailto:maazansari25667@gmail.com)
 
-### Reporting Security Issues
+**Features**
 
-* 📧 **Email:** [maazansari25667@gmail.com](mailto:maazansari25667@gmail.com)
-* 🚫 **Do NOT** post public issues for vulnerabilities
-* Include detailed **steps to reproduce** and **impact assessment**
-
-### Security Features
-
-* 🔒 Automated Secret Scanning (pre-commit protection)
-* 🛡️ Dependency Auditing & Vulnerability Checks
-* 🔐 Input Validation and Data Sanitization
-* 📊 Real-time Security Monitoring
+* 🔒 Secret Scanning
+* 🛡️ Dependency Audits
+* 🔐 Input Validation
+* 📊 Monitoring
 
 ---
 
 ## 📜 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for full details.
+Licensed under the [MIT License](LICENSE).
 
 ---
 
 ### 💖 Built with Passion
 
-> Built with modern web technologies, scalable architecture, and enterprise-grade security.
-> Empowering smarter, faster, and fairer hiring — powered by AI. 🤖✨
+> Modern tech ✨ Scalable design 🧠 Enterprise security 🛡️
+> Empowering smarter and faster hiring — powered by AI 🤖
 
 ```
 
