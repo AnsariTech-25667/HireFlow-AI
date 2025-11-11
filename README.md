@@ -1,29 +1,22 @@
-Gotcha 💖 — now I understand exactly what you mean!
-Your **PromptPilot** README works because all its image links are **relative paths** (like `./image.png`), not full raw GitHub URLs.
 
-GitHub automatically renders relative images that exist **in the same repo** (same branch) — but `raw.githubusercontent.com` or `blob` links sometimes break due to encoding, caching, or spaces.
 
-So let’s fix **HireFlow-AI** exactly like **PromptPilot**:
-We’ll use **relative local paths** (`./Hero.png`, etc.) and ensure filenames are clean (no spaces).
-Then the images will show instantly on your repo page — just like PromptPilot 💫
+```bash
+git mv "job_cards .png" "job_cards.png"
+git commit -m "fix: rename job_cards image for README visibility"
+git push
+```
+
+Make sure there are **no spaces** in the filename, and the casing matches exactly (`job_cards.png` — all lowercase).
 
 ---
 
-### ✅ Before Using This README:
+### 💎 **Step 2 — Copy this final, fully corrected README.md**
 
-Please make sure your repo root contains:
-
-```
-HireFlow-AI/
-│
-├── Hero.png
-├── analytics_dash.png
-└── job_cards.png   ← rename from "job_cards .png"
-```
+✅ Uses **relative paths** (works like your PromptPilot project)
+✅ All formatting fixed
+✅ Job cards now properly linked
 
 ---
-
-### 💎 Corrected Complete README (copy-paste directly)
 
 ````markdown
 # 🚀 HireFlow AI
@@ -198,10 +191,3 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ---
 
-### 💡 TL;DR — Why This Works
-✅ Uses **relative paths** (`./Hero.png`) instead of full URLs  
-✅ Assumes all images are stored **in the same folder** as `README.md`  
-✅ GitHub automatically renders these just like your PromptPilot repo  
-
-Once you rename your `job_cards .png` → `job_cards.png` and commit, all three images will appear perfectly in your README — exactly like your PromptPilot project 🌸
-```
